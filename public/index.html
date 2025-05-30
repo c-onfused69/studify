@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Management Portal</title>
+  <link rel="stylesheet" href="../src/css/style.css" />
+  <link rel="stylesheet" href="../src/css/layout.css" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="nav-top">
+        <h2>Student Portal</h2>
+        <nav>
+          <a href="index.html">🏠 Home</a>
+          <a href="#">📊 Analytics</a>
+          <a href="#">📚 Courses</a>
+        </nav>
+      </div>
+      <div class="nav-bottom">
+        <h4>Tools</h4>
+        <nav>
+          <a href="#">⚙️ Settings</a>
+          <a href="#">❓ Help</a>
+          <a href="#">👤 Manage User</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <h1>Student List</h1>
+
+      <!-- ✅ Add Student Button -->
+      <div style="text-align: right; margin-bottom: 15px;">
+        <a href="add-student.html">
+          <button type="button">➕ Add Student</button>
+        </a>
+      </div>
+
+      <div class="search-sort-controls">
+        <input type="text" id="search" placeholder="Search by name..." />
+        <select id="sort">
+          <option value="name">Sort by Name</option>
+          <option value="email">Sort by Email</option>
+        </select>
+      </div>
+
+      <!-- ✅ Target div for displaying students -->
+      <div id="student-list-container"></div>
+    </main>
+  </div>
+
+  <script type="module" src="../src/js/main.js"></script>
+</body>
+</html>
