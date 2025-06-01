@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Orders</title>
+  <link rel="stylesheet" href="../src/css/style.css" />
+  <link rel="stylesheet" href="../src/css/view-orders.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">📚 BookShop</div>
+    <nav class="nav-links">
+      <a href="home-page.html">Home</a>
+      <a href="view-orders.html" class="active">Orders</a>
+    </nav>
+  </header>
+
+  <main class="orders-section">
+    <h1>Customer Orders</h1>
+    <div id="orders-container" class="orders-container">
+      <!-- Orders will be rendered here -->
+    </div>
+  </main>
+
+  <script>
+    function renderOrders() {
+      const container = document.getElementById('orders-container');
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+      if (orders.length === 0) {
+        container.innerHTML = '<p>No orders have been placed yet.</p>';
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        const orderDiv = document.createElement('div');
+        orderDiv.className = 'order-card';
+
+        const bookItems = order.cart.map(book => `
+          <li>${book.title} (x${book.quantity}) - $${(book.quantity * book.price).toFixed(2)}</li>
+        `).join('');
+
+        const totalPrice = order.cart.reduce((sum, b) => sum + b.quantity * b.price, 0);
+
+        orderDiv.innerHTML = `
+          <h3>Order #${index + 1}</h3>
+          <p><strong>Name:</strong> ${order.name}</p>
+          <p><strong>Contact:</strong> ${order.contact}</p>
+          <p><strong>Address:</strong> ${order.address}</p>
+          <p><strong>Books Ordered:</strong></p>
+          <ul>${bookItems}</ul>
+          <p><strong>Total Price:</strong> $${totalPrice.toFixed(2)}</p>
+        `;
+
+        container.appendChild(orderDiv);
+      });
+    }
+
+    renderOrders();
+  </script>
+</body>
+</html>

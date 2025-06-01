@@ -1,0 +1,23 @@
+.orders-section {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.order-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #f9f9f9;
+}
+
+.order-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.order-card ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}

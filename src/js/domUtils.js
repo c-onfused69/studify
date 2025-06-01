@@ -1,16 +1,16 @@
-import { deleteStudent } from './studentManager.js';
+import { deleteBook } from './bookManager.js';
 
-// domUtils.js
-export function createStudentCard(student) {
+export function createBookCard(book) {
   const div = document.createElement('div');
-  div.className = 'student-card';
+  div.className = 'book-card';
   div.innerHTML = `
-    <h3>${student.name}</h3>
-    <p>Email: ${student.email}</p>
-    <p>Age: ${student.age}</p>
+    <img src="${book.image || 'default-book.jpg'}" alt="${book.title}" class="book-image"/>
+    <h3>${book.title}</h3>
+    <p>Author: ${book.author}</p>
+    <p>Price: $${book.price}</p>
     <div class="actions">
-      <button onclick="location.href='add-student.html?id=${student.id}'">Edit</button>
-      <button class="delete-btn" data-id="${student.id}">Delete</button>
+      <button onclick="location.href='add-book.html?id=${book.id}'">Edit</button>
+      <button class="delete-btn" data-id="${book.id}">Delete</button>
     </div>
   `;
   return div;

@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Management Portal</title>
+  <title>Book Store Management</title>
   <link rel="stylesheet" href="../src/css/style.css" />
-  <link rel="stylesheet" href="../src/css/layout.css" />
 </head>
 <body>
+  <!-- Hamburger Menu -->
+  <button class="hamburger" id="hamburger-btn">☰</button>
+
   <div class="app-container">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="nav-top">
-        <h2>Student Portal</h2>
+        <h2>📚 Book Store</h2>
         <nav>
           <a href="index.html">🏠 Home</a>
-          <a href="#">📊 Analytics</a>
-          <a href="#">📚 Courses</a>
+          <a href="#">📊 Reports</a>
+          <a href="#">🛒 Orders</a>
         </nav>
       </div>
       <div class="nav-bottom">
@@ -23,34 +25,36 @@
         <nav>
           <a href="#">⚙️ Settings</a>
           <a href="#">❓ Help</a>
-          <a href="#">👤 Manage User</a>
+          <a href="home-page.html">👤 Account Front</a>
         </nav>
       </div>
     </aside>
 
     <main class="main-content">
-      <h1>Student List</h1>
-
-      <!-- ✅ Add Student Button -->
-      <div style="text-align: right; margin-bottom: 15px;">
-        <a href="add-student.html">
-          <button type="button">➕ Add Student</button>
+      <h1>Book List</h1>
+      <div class="add-button-container">
+        <a href="add-book.html">
+          <button type="button">➕ Add Book</button>
         </a>
       </div>
 
       <div class="search-sort-controls">
-        <input type="text" id="search" placeholder="Search by name..." />
+        <input type="text" id="search" placeholder="Search by title..." />
         <select id="sort">
-          <option value="name">Sort by Name</option>
-          <option value="email">Sort by Email</option>
+          <option value="name">Sort by Title</option>
+          <option value="author">Sort by Author</option>
         </select>
       </div>
 
-      <!-- ✅ Target div for displaying students -->
-      <div id="student-list-container"></div>
+      <div id="book-list-container"></div>
     </main>
   </div>
 
   <script type="module" src="../src/js/main.js"></script>
+  <script>
+    document.getElementById('hamburger-btn').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+  </script>
 </body>
 </html>

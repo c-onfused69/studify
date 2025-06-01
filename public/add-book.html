@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Book</title>
+    <link rel="stylesheet" href="../src/css/style.css" />
+  </head>
+  <body>
+    <!-- Hamburger -->
+    <button class="hamburger" id="hamburger-btn">☰</button>
+
+    <div class="app-container">
+      <aside class="sidebar" id="sidebar">
+        <div class="nav-top">
+          <h2>📚 Book Store</h2>
+          <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="#">📊 Reports</a>
+            <a href="#">🛒 Orders</a>
+          </nav>
+        </div>
+        <div class="nav-bottom">
+          <h4>Tools</h4>
+          <nav>
+            <a href="#">⚙️ Settings</a>
+            <a href="#">❓ Help</a>
+            <a href="#">👤 Account</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <h1>Add / Edit Book</h1>
+        <form id="bookForm">
+          <label>
+            Book Title:
+            <input type="text" id="title" required />
+          </label>
+          <label>
+            Author:
+            <input type="text" id="author" required />
+          </label>
+          <label>
+            Price ($):
+            <input type="number" id="price" required />
+          </label>
+          <label for="image">Book Image:</label>
+          <input type="file" id="image" accept="image/*" />
+          <img
+            id="preview"
+            src=""
+            alt="Book Preview"
+            style="max-width: 200px; display: none; margin-top: 10px"
+          />
+          <button type="submit">Save Book</button>
+        </form>
+      </main>
+    </div>
+
+    <script type="module" src="../src/js/add.js"></script>
+    <script>
+      document.getElementById("hamburger-btn").addEventListener("click", () => {
+        document.getElementById("sidebar").classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>

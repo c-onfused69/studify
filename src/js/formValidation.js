@@ -1,45 +1,48 @@
 // formValidation.js
 import { getFromStorage, saveToStorage } from './storage.js';
 
+let imageBase64 = '';
+
 export function handleFormSubmit(e) {
   e.preventDefault();
 
   const urlParams = new URLSearchParams(window.location.search);
   const editingId = urlParams.get('id');
 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const age = document.getElementById('age').value.trim();
+  const title = document.getElementById('title').value.trim();
+  const author = document.getElementById('author').value.trim();
+  const price = document.getElementById('price').value.trim();
 
-  if (!name || !email || !age) {
+  if (!title || !author || !price) {
     alert('Please fill all fields!');
     return;
   }
 
-  let students = getFromStorage('students') || [];
+  let books = getFromStorage('books') || [];
 
   if (editingId) {
-    // Edit existing student
-    students = students.map(student => {
-      if (student.id === editingId) {
-        return { id: editingId, name, email, age };
+    // Edit book
+    books = books.map(book => {
+      if (book.id === editingId) {
+        return { id: editingId, title, author, price, image: imageBase64 || book.image || '' };
       }
-      return student;
+      return book;
     });
-    alert('Student updated!');
+    alert('Book updated!');
   } else {
-    // Add new student
-    const newStudent = {
+    // Add new book
+    const newBook = {
       id: Date.now().toString(),
-      name,
-      email,
-      age
+      title,
+      author,
+      price,
+      image: imageBase64 || ''
     };
-    students.push(newStudent);
-    alert('Student added!');
+    books.push(newBook);
+    alert('Book added!');
   }
 
-  saveToStorage('students', students);
+  saveToStorage('books', books);
   window.location.href = 'index.html';
 }
 
@@ -48,11 +51,39 @@ export function populateFormIfEditing() {
   const editingId = urlParams.get('id');
   if (!editingId) return;
 
-  const students = getFromStorage('students') || [];
-  const student = students.find(s => s.id === editingId);
-  if (!student) return;
+  const books = getFromStorage('books') || [];
+  const book = books.find(b => b.id === editingId);
+  if (!book) return;
 
-  document.getElementById('name').value = student.name;
-  document.getElementById('email').value = student.email;
-  document.getElementById('age').value = student.age;
+  document.getElementById('title').value = book.title;
+  document.getElementById('author').value = book.author;
+  document.getElementById('price').value = book.price;
+
+  if (book.image) {
+    imageBase64 = book.image;
+    const preview = document.getElementById('preview');
+    preview.src = book.image;
+    preview.style.display = 'block';
+  }
 }
+
+// Convert selected image to base64
+document.addEventListener('DOMContentLoaded', () => {
+  const imageInput = document.getElementById('image');
+  const preview = document.getElementById('preview');
+
+  if (imageInput) {
+    imageInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imageBase64 = e.target.result;
+          preview.src = imageBase64;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+});
