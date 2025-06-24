@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Shop</title>
+  <link rel="stylesheet" href="../src/css/style.css" />
+  <link rel="stylesheet" href="../src/css/home-style.css" />
+  <script src="https://kit.fontawesome.com/5378eb7cb3.js" crossorigin="anonymous"></script>
+  <style>
+    .contact-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .contact-container h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+
+    .contact-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-container input,
+    .contact-container textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .contact-container textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-container button {
+      align-self: flex-start;
+      background-color: #007bff;
+    }
+
+    .contact-container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="logo">📚 BookShop</div>
+    <nav class="nav-links" id="nav-links">
+      <a href="home-page.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger">☰</button>
+    <!-- <i id="cart-icon" class="fa-solid fa-cart-shopping"></i> -->
+  </header>
+
+  <!-- Contact Form Section -->
+  <main>
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+      <form id="contact-form">
+        <input type="text" id="name" name="name" placeholder="Your Name" required />
+        <input type="email" id="email" name="email" placeholder="Your Email" required />
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Font Awesome (for cart icon) -->
+  <script src="https://kit.fontawesome.com/5378eb7cb3.js" crossorigin="anonymous"></script>
+
+  <!-- JS: Hamburger toggle & form submission -->
+  <script>
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Clear form fields
+      this.reset();
+      // Show alert popup
+      alert("✅ Message sent!");
+    });
+  </script>
+
+  
+
+  
+  
+
+</body>
+</html>

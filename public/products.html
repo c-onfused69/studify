@@ -6,12 +6,11 @@
   <title>Book Shop</title>
   <link rel="stylesheet" href="../src/css/style.css" />
   <link rel="stylesheet" href="../src/css/home-style.css" />
-  <!------KIT SCRIPT------>
-    <script src="https://kit.fontawesome.com/5378eb7cb3.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/5378eb7cb3.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!--  Navigation -->
+  <!-- Navigation -->
   <header class="navbar">
     <div class="logo">📚 BookShop</div>
     <nav class="nav-links" id="nav-links">
@@ -20,21 +19,27 @@
       <a href="contact.html">Contact</a>
     </nav>
     <button class="hamburger" id="hamburger">☰</button>
-    <!--  Cart Icon -->
-  <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
+    <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
   </header>
 
-  <!--  Book Section -->
+  <!-- Book Section -->
   <main class="book-section">
-    <h1>Available Books</h1>
-    <div class="book-grid" id="book-grid">
-      <!-- Books will be rendered here -->
+    <h1>All Books</h1>
+
+    <!-- Search & Sort Controls -->
+    <div class="search-sort-controls">
+      <input type="text" id="search" placeholder="Search by title..." />
+      <select id="sort">
+        <option value="name">Sort by Title</option>
+        <option value="author">Sort by Author</option>
+      </select>
     </div>
+
+    <!-- Book List -->
+    <div id="book-list-container" class="book-grid"></div>
   </main>
 
-  
-
-  <!--  Cart Modal -->
+  <!-- Cart Modal -->
   <div id="cart-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-cart">&times;</span>
@@ -55,23 +60,23 @@
     </div>
   </div>
 
-  <!--  Scripts -->
+  <!-- Script -->
   <script>
     document.getElementById('hamburger').addEventListener('click', () => {
       document.getElementById('nav-links').classList.toggle('open');
     });
 
+    const searchInput = document.getElementById('search');
+    const sortSelect = document.getElementById('sort');
+    const bookContainer = document.getElementById('book-list-container');
     let cart = [];
+    let books = [];
 
-    function renderBooks() {
-      const bookGrid = document.getElementById('book-grid');
-      const books = JSON.parse(localStorage.getItem('books')) || [];
-
-      bookGrid.innerHTML = '';
-      books.forEach(book => {
+    function renderBooks(displayBooks) {
+      bookContainer.innerHTML = '';
+      displayBooks.forEach(book => {
         const card = document.createElement('div');
         card.className = 'book-card';
-
         card.innerHTML = `
           <img src="${book.image || 'https://via.placeholder.com/150x200'}" alt="${book.title}" class="book-image" />
           <h3 class="book-title">${book.title}</h3>
@@ -92,7 +97,7 @@
           addToCart(book, qty);
         });
 
-        bookGrid.appendChild(card);
+        bookContainer.appendChild(card);
       });
     }
 
@@ -173,7 +178,31 @@
       setTimeout(closeCartModal, 2000);
     });
 
-    renderBooks();
+    function filterAndSortBooks() {
+      const searchValue = searchInput.value.toLowerCase();
+      const sortValue = sortSelect.value;
+
+      let filtered = books.filter(book =>
+        book.title.toLowerCase().includes(searchValue)
+      );
+
+      if (sortValue === 'name') {
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortValue === 'author') {
+        filtered.sort((a, b) => a.author.localeCompare(b.author));
+      }
+
+      renderBooks(filtered);
+    }
+
+    // Load books and initialize
+    window.onload = () => {
+      books = JSON.parse(localStorage.getItem('books')) || [];
+      filterAndSortBooks();
+    };
+
+    searchInput.addEventListener('input', filterAndSortBooks);
+    sortSelect.addEventListener('change', filterAndSortBooks);
   </script>
 
 </body>

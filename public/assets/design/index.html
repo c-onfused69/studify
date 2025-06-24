@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hardcoded Book Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Gill Sans';
+    }
+    
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-body h3 {
+      margin: 0.5rem 0;
+    }
+
+    .card-body p {
+      margin: 0.3rem 0;
+      color: #555;
+    }
+
+    .buy-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+
+    .buy-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .cart {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      z-index: 10;
+    }
+
+    #cart-items {
+      text-align: left;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    form input, form textarea {
+      width: 95%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #218838;
+    }
+
+    .confirmation {
+      text-align: center;
+      font-size: 1.3rem;
+      color: green;
+      margin-top: 1rem;
+    }
+
+  
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Simple Book Store</h1>
+  </header>
+  
+
+  <main class="container">
+    <!-- 15 Book Cards -->
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKi5lknrw7SIwZ01RQRqyvtXz2bFxrUsGVpA&s" alt="The Great Gatsby">
+      <div class="card-body">
+        <h3>The Great Gatsby</h3>
+        <p>Author: F. Scott Fitzgerald</p>
+        <p>Price: ৳1209</p>
+        <button class="buy-btn" onclick="addToCart('The Great Gatsby', 1209)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/71kxa1-0mfL.jpg" alt="1984">
+      <div class="card-body">
+        <h3>1984</h3>
+        <p>Author: George Orwell</p>
+        <p>Price: ৳989</p>
+        <button class="buy-btn" onclick="addToCart('1984', 989)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg/1200px-To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg" alt="To Kill a Mockingbird">
+      <div class="card-body">
+        <h3>To Kill a Mockingbird</h3>
+        <p>Author: Harper Lee</p>
+        <p>Price: ৳1099</p>
+        <button class="buy-btn" onclick="addToCart('To Kill a Mockingbird', 1099)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn1.bookmanager.com/i/m?b=rBSsMLeAZlbH_8bDoVHfdA&cb=1736567719" alt="Moby Dick">
+      <div class="card-body">
+        <h3>Moby Dick</h3>
+        <p>Author: Herman Melville</p>
+        <p>Price: ৳1265</p>
+        <button class="buy-btn" onclick="addToCart('Moby Dick', 1265)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/13/8d/84/138d84314192d23032dc025d79d819e5.jpg" alt="Pride and Prejudice">
+      <div class="card-body">
+        <h3>Pride and Prejudice</h3>
+        <p>Author: Jane Austen</p>
+        <p>Price: ৳879</p>
+        <button class="buy-btn" onclick="addToCart('Pride and Prejudice', 879)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/81OthjkJBuL.jpg" alt="The Catcher in the Rye">
+      <div class="card-body">
+        <h3>The Catcher in the Rye</h3>
+        <p>Author: J.D. Salinger</p>
+        <p>Price: ৳769</p>
+        <button class="buy-btn" onclick="addToCart('The Catcher in the Rye', 769)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn.kobo.com/book-images/8a9359fd-f4cb-4ecd-98c2-b90cf94e9e35/1200/1200/False/war-and-peace-37.jpg" alt="War and Peace">
+      <div class="card-body">
+        <h3>War and Peace</h3>
+        <p>Author: Leo Tolstoy</p>
+        <p>Price: ৳1649</p>
+        <button class="buy-btn" onclick="addToCart('War and Peace', 1649)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/81t2CVWEsUL.jpg" alt="The Hobbit">
+      <div class="card-body">
+        <h3>The Hobbit</h3>
+        <p>Author: J.R.R. Tolkien</p>
+        <p>Price: ৳1100</p>
+        <button class="buy-btn" onclick="addToCart('The Hobbit', 1100)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg" alt="The Lord of the Rings">
+      <div class="card-body">
+        <h3>The Lord of the Rings</h3>
+        <p>Author: J.R.R. Tolkien</p>
+        <p>Price: ৳1650</p>
+        <button class="buy-btn" onclick="addToCart('The Lord of the Rings', 1650)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/81drfTT9ZfL.jpg" alt="Crime and Punishment">
+      <div class="card-body">
+        <h3>Crime and Punishment</h3>
+        <p>Author: Fyodor Dostoevsky</p>
+        <p>Price: ৳1375</p>
+        <button class="buy-btn" onclick="addToCart('Crime and Punishment', 1375)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkSor7LOFTupY3jAzgRqIDSMK8xQJT3y1VOA&s" alt="Brave New World">
+      <div class="card-body">
+        <h3>Brave New World</h3>
+        <p>Author: Aldous Huxley</p>
+        <p>Price: ৳1045</p>
+        <button class="buy-btn" onclick="addToCart('Brave New World', 1045)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqyMVu4wCO4HQOlutpmDTFJUrix3bia03NVg&s" alt="Jane Eyre">
+      <div class="card-body">
+        <h3>Jane Eyre</h3>
+        <p>Author: Charlotte Brontë</p>
+        <p>Price: ৳1182</p>
+        <button class="buy-btn" onclick="addToCart('Jane Eyre', 1182)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://www.magicmurals.com/media/amasty/webp/catalog/product/cache/ecd0f3b2ed8023964fbb00ac1cd91c21/a/d/adg-0000001045_1_jpg.webp" alt="Frankenstein">
+      <div class="card-body">
+        <h3>Frankenstein</h3>
+        <p>Author: Mary Shelley</p>
+        <p>Price: ৳825</p>
+        <button class="buy-btn" onclick="addToCart('Frankenstein', 825)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/81t2CVWEsUL._SL1500_.jpg" alt="Wuthering Heights">
+      <div class="card-body">
+        <h3>Wuthering Heights</h3>
+        <p>Author: Emily Brontë</p>
+        <p>Price: ৳908</p>
+        <button class="buy-btn" onclick="addToCart('Wuthering Heights', 908)">Add to Total</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546091617i/15823480.jpg" alt="Anna Karenina">
+      <div class="card-body">
+        <h3>Anna Karenina</h3>
+        <p>Author: Leo Tolstoy</p>
+        <p>Price: ৳1513</p>
+        <button class="buy-btn" onclick="addToCart('Anna Karenina', 1513)">Add to Total</button>
+      </div>
+    </div>
+  </main>
+
+  <div style="margin-left: 25%;" class="cart">
+    <h2>Total: ৳<span id="total">0.00</span></h2>
+    <div id="cart-items"></div>
+  </div>
+
+  <form onsubmit="handleSubmit(event)">
+    <h2>Customer Information</h2>
+    <input type="text" id="customerName" placeholder="Full Name" required>
+    <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+    <textarea id="address" placeholder="Address" rows="3" required></textarea>
+    <button type="submit">Continue</button>
+    <div class="confirmation" id="confirmationMessage"></div>
+  </form>
+
+  <script>
+    let total = 0;
+    const cartItems = [];
+
+    function addToCart(name, price) {
+      total += price;
+      cartItems.push({ name, price });
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      document.getElementById('total').textContent = total.toFixed(2);
+      const cartList = cartItems.map(item => `<div>📘 ${item.name} - ৳${item.price}</div>`).join('');
+      document.getElementById('cart-items').innerHTML = cartList;
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('customerName').value;
+      const phone = document.getElementById('phoneNumber').value;
+      const address = document.getElementById('address').value;
+
+      if (!name || !phone || !address || cartItems.length === 0) {
+        alert("Please fill all fields and add at least one book to the cart.");
+        return;
+      }
+
+      document.getElementById('confirmationMessage').textContent = "✅ Your order is processing...";
+    }
+  </script>
+</body>
+</html>
